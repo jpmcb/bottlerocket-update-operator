@@ -27,12 +27,13 @@ pub mod error;
 /// };
 /// ```
 ///
-/// Add the BottlerocketShadow version to the end of BOTTLEROCKETSHADOW_CRD_VERSIONS
-/// so the webhook conversion could set up proper conversion_review_versions
+/// Add the BottlerocketShadow version to the start of BOTTLEROCKETSHADOW_CRD_VERSIONS
+/// so the webhook conversion sets up proper conversion_review_versions.
+/// API servers send the first version in the list that they support.
 #[cfg_attr(doctest, doc = " ````no_test")]
 /// ```
 /// static ref BOTTLEROCKETSHADOW_CRD_VERSIONS: Vec<String> =
-///     vec!["v1".to_string(), "v2".to_string()];
+///     vec!["v2".to_string(), "v1".to_string()];
 /// ```
 ///
 pub mod v1;
@@ -69,7 +70,7 @@ lazy_static! {
         ]
     };
     static ref BOTTLEROCKETSHADOW_CRD_VERSIONS: Vec<String> =
-        vec!["v1".to_string(), "v2".to_string()];
+        vec!["v2".to_string(), "v1".to_string()];
 }
 
 pub trait BottlerocketShadowResource: kube::ResourceExt {}
